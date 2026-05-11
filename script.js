@@ -676,3 +676,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   skillCols.forEach(col => observer.observe(col));
 })();
+
+
+/* ===== Footer Year ===== */
+(function initFooterYear() {
+  const el = document.getElementById('footerYear');
+  if (el) el.textContent = new Date().getFullYear();
+})();

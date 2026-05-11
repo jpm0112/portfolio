@@ -125,12 +125,8 @@
           <p>
             I'm a fifth-year PhD candidate in Industrial and Systems Engineering at
             <strong>Auburn University</strong>. My research covers operations research, machine
-            learning, optimization, and simulation. My dissertation,
-            <em>Integrating Prediction and Optimization: Data-Driven Methods for Complex Logistics Problems</em>,
-            spans three studies that progress from classical optimization (a matheuristic for two-dimensional vehicle loading),
-            to deep learning forecasting (explainable AI for maritime container freight rates),
-            to their integration via decision-focused learning for port operations,
-            advised by Alice E. Smith and Daniel Silva.
+            learning, optimization, and simulation, with a dissertation on advanced methods
+            for complex logistics problems, advised by Alice E. Smith and Daniel Silva.
             I've been on the INFORMS student
             chapter board every year since 2022, including a term as President in 2024–25.
           </p>
@@ -367,7 +363,7 @@
           <span class="project__num">04</span>
           <div class="project__content">
             <h3>Two-Dimensional Truck Loading Optimization</h3>
-            <p>Developed a three-stage matheuristic combining MILP models to solve a two-dimensional vehicle loading problem faced by a Colombian motorcycle assembler operating a heterogeneous fleet. The approach maximizes on-time deliveries, minimizes the number of trucks used, and reduces unloading rehandles during delivery stops. Across 300 test instances, the matheuristic improved the company-defined performance metric by an average of 27% over one-dimensional baselines, particularly under relaxed credit constraints. Implemented in Java with CPLEX.</p>
+            <p>Developed a three-stage matheuristic combining MILP models to solve a two-dimensional vehicle loading problem faced by a Colombian motorcycle assembler operating a heterogeneous fleet. The approach maximizes on-time deliveries, minimizes the number of trucks used, and reduces unloading rehandles during delivery stops. Across 300 test instances, the matheuristic improved the company-defined performance metric by an average of 27% over one-dimensional baselines and saved 2.69 trucks per day on average, particularly under relaxed credit constraints. Implemented in Java with CPLEX.</p>
             <div class="project__tags">
               <span>MILP</span><span>Matheuristic</span><span>Two-Dimensional Bin Packing</span><span>Logistics</span>
             </div>
@@ -415,7 +411,7 @@
           <span class="project__num">08</span>
           <div class="project__content">
             <h3>Decision-Focused Learning for Berth Allocation</h3>
-            <p>Third dissertation chapter (in progress). Trains an LSTM forecaster of vessel arrival and service times jointly with a MILP berth allocation model using decision-focused learning — SPO+ loss and perturbation-based gradients — so that the predictor minimizes schedule cost regret instead of forecast error. Evaluated against a standard predict-then-optimize baseline on Port of San Antonio (Chile) historical data, with SHAP/LIME comparing feature attributions before and after DFL training.</p>
+            <p>Third dissertation chapter. Trains an LSTM forecaster of vessel arrival and service times jointly with a MILP berth allocation model using decision-focused learning — SPO+ loss and perturbation-based gradients — so that the predictor minimizes schedule cost regret instead of forecast error. Evaluated against a standard predict-then-optimize baseline on Port of San Antonio (Chile) historical data, with SHAP/LIME comparing feature attributions before and after DFL training.</p>
             <div class="project__tags">
               <span>Decision-Focused Learning</span><span>SPO+</span><span>MILP</span><span>LSTM</span><span>Berth Allocation</span><span>Gurobi</span>
             </div>

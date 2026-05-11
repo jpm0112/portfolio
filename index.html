@@ -125,8 +125,12 @@
           <p>
             I'm a fifth-year PhD candidate in Industrial and Systems Engineering at
             <strong>Auburn University</strong>. My research covers operations research, machine
-            learning, optimization, and simulation, with a dissertation on advanced methods
-            for complex logistics problems, advised by Alice E. Smith and Daniel Silva.
+            learning, optimization, and simulation. My dissertation,
+            <em>Integrating Prediction and Optimization: Data-Driven Methods for Complex Logistics Problems</em>,
+            spans three studies that progress from classical optimization (a matheuristic for two-dimensional vehicle loading),
+            to deep learning forecasting (explainable AI for maritime container freight rates),
+            to their integration via decision-focused learning for port operations,
+            advised by Alice E. Smith and Daniel Silva.
             I've been on the INFORMS student
             chapter board every year since 2022, including a term as President in 2024–25.
           </p>
@@ -405,6 +409,18 @@
             </div>
           </div>
         </article>
+
+        <article class="project reveal" style="--d:7">
+          <div class="project__glow"></div>
+          <span class="project__num">08</span>
+          <div class="project__content">
+            <h3>Decision-Focused Learning for Berth Allocation</h3>
+            <p>Third dissertation chapter (in progress). Trains an LSTM forecaster of vessel arrival and service times jointly with a MILP berth allocation model using decision-focused learning — SPO+ loss and perturbation-based gradients — so that the predictor minimizes schedule cost regret instead of forecast error. Evaluated against a standard predict-then-optimize baseline on Port of San Antonio (Chile) historical data, with SHAP/LIME comparing feature attributions before and after DFL training.</p>
+            <div class="project__tags">
+              <span>Decision-Focused Learning</span><span>SPO+</span><span>MILP</span><span>LSTM</span><span>Berth Allocation</span><span>Gurobi</span>
+            </div>
+          </div>
+        </article>
       </div>
 
       <!-- Applied Projects -->
@@ -420,7 +436,7 @@
       <div class="projects__grid">
         <article class="project reveal" style="--d:0">
           <div class="project__glow"></div>
-          <span class="project__num">08</span>
+          <span class="project__num">09</span>
           <div class="project__content">
             <h3>Web Development & Showcase Sites</h3>
             <p>Built a range of portfolio and business websites, including bilingual company pages, personal sites, and this portfolio itself, each with responsive layouts and clean visual design.</p>
@@ -432,7 +448,7 @@
 
         <article class="project reveal" style="--d:1">
           <div class="project__glow"></div>
-          <span class="project__num">09</span>
+          <span class="project__num">10</span>
           <div class="project__content">
             <h3>Health & Fitness Mobile App</h3>
             <p>Cross-platform mobile application for health and fitness tracking across iOS, Android, and the web, featuring nutrition logging, weight tracking, and progress dashboards. Started as an excuse to try AI-powered development tools (and to avoid paying for fitness apps).</p>
@@ -444,7 +460,7 @@
 
         <article class="project reveal" style="--d:2">
           <div class="project__glow"></div>
-          <span class="project__num">10</span>
+          <span class="project__num">11</span>
           <div class="project__content">
             <h3>Chilean Pension Fund Legal Advisor</h3>
             <p>A compliance advisor deployed at a Chilean pension fund administrator (AFP) to assist legal teams with financial regulations. It pairs a hybrid RAG pipeline (bi-encoder retrieval plus cross-encoder reranking over more than 4,500 legal document chunks) and multi-hop agents with a QLoRA fine-tuned Qwen2.5-7B model that answers regulatory questions and cites the source documentation.</p>
@@ -456,7 +472,7 @@
 
         <article class="project reveal" style="--d:3">
           <div class="project__glow"></div>
-          <span class="project__num">11</span>
+          <span class="project__num">12</span>
           <div class="project__content">
             <h3>Emergent Small Town Economy with LLM Agents</h3>
             <p>A simulation in which LLM agents autonomously run the economy of a small town: they work, start businesses, set their own prices, socialize, and reflect at the end of each day. Business types, products, and custom actions are generated dynamically by the model, with dedicated judge agents validating the plausibility of new businesses and actions before they enter the world. Runs locally on vLLM with Qwen2.5-3B-Instruct.</p>

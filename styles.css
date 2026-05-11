@@ -1712,7 +1712,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 
   .edu__cards { grid-template-columns: 1fr; }
   .projects__grid { grid-template-columns: 1fr; }
-  .about__stats { grid-template-columns: 1fr 1fr; }
+  .about__stats { display: none; }
   .skills__grid { grid-template-columns: 1fr; }
   .contact__links { grid-template-columns: 1fr; }
   .contact__cta { flex-direction: column; }

@@ -1001,12 +1001,12 @@ em { font-family: var(--font-serif); font-style: italic; }
 /* ===== Skills ===== */
 .skills__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 
 .skill-col {
-  padding: 24px;
+  padding: 32px;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--cream);

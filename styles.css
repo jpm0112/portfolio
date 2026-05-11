@@ -389,7 +389,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
 }

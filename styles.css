@@ -9,7 +9,7 @@
   --copper-light: #d4976a;
   --copper-dim: rgba(184, 115, 51, 0.1);
   --text: #2d3436;
-  --text-light: #636e72;
+  --text-light: #5a6266;
   --text-lighter: #9ca3af;
   --border: #e0ddd6;
   --border-light: #ece9e2;
@@ -801,7 +801,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   position: relative;
   padding-left: 16px;
   margin-bottom: 6px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-light);
   line-height: 1.6;
 }
@@ -979,7 +979,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 }
 
 .project__content p {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-light);
   line-height: 1.7;
   margin-bottom: 16px;
@@ -1048,7 +1048,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .skill-col li {
   position: relative;
   padding: 8px 0 8px 16px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-light);
   border-bottom: 1px solid var(--border-light);
 }

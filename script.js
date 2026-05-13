@@ -289,8 +289,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      targetX = x * 0.12;
-      targetY = y * 0.12;
+      targetX = x * 0.04;
+      targetY = y * 0.04;
       if (!rafId) rafId = requestAnimationFrame(animate);
     });
 

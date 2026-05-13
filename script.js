@@ -197,23 +197,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 })();
 
-/* ===== Cursor-following glow on project cards ===== */
-(function initProjectGlow() {
-  const projects = document.querySelectorAll('.project');
-  projects.forEach(card => {
-    const glow = card.querySelector('.project__glow');
-    if (!glow) return;
-
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      glow.style.left = x + 'px';
-      glow.style.top = y + 'px';
-    });
-  });
-})();
-
 /* ===== 3D Tilt effect on stat & education cards ===== */
 (function initTilt() {
   const cards = document.querySelectorAll('.stat, .edu__card, .hero__card');
@@ -426,11 +409,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach((p, i) => {
-      // Pulse opacity
       const pulse = Math.sin(time * p.pulseSpeed + p.pulsePhase) * 0.15 + 0.85;
       const alpha = p.opacity * pulse;
 
-      // Mouse repulsion
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -440,23 +421,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         p.y += dy * force * 0.02;
       }
 
-      // Move
       p.x += p.vx;
       p.y += p.vy;
 
-      // Wrap edges
       if (p.x < -10) p.x = canvas.width + 10;
       if (p.x > canvas.width + 10) p.x = -10;
       if (p.y < -10) p.y = canvas.height + 10;
       if (p.y > canvas.height + 10) p.y = -10;
 
-      // Draw particle
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(184, 115, 51, ${alpha})`;
       ctx.fill();
 
-      // Draw connections
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const cdx = p.x - p2.x;
@@ -496,7 +473,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     createParticles();
   });
 
-  // Stop animation when hero is not in view
   const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) {

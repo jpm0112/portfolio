@@ -19,6 +19,10 @@
   --nav-h: 72px;
   --max-w: 1120px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-chip: 4px;
+  --r-button: 8px;
+  --r-card: 14px;
+  --r-hero: 22px;
 }
 
 /* ===== Hero Particles Canvas ===== */
@@ -93,47 +97,6 @@
 .marquee::after {
   right: 0;
   background: linear-gradient(to left, var(--navy), transparent);
-}
-
-/* ===== Animated Gradient Border (Project Cards) ===== */
-.project::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 16px;
-  padding: 1.5px;
-  background: linear-gradient(
-    var(--gradient-angle, 0deg),
-    transparent 0%,
-    var(--copper) 25%,
-    var(--copper-light) 50%,
-    var(--copper) 75%,
-    transparent 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.project:hover::after {
-  opacity: 1;
-  animation: rotateBorder 3s linear infinite;
-}
-
-@keyframes rotateBorder {
-  0% { --gradient-angle: 0deg; }
-  100% { --gradient-angle: 360deg; }
-}
-
-@property --gradient-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
 }
 
 /* ===== Scroll Progress Bar ===== */
@@ -302,7 +265,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .nav__cta {
   padding: 8px 20px;
   border: 1.5px solid var(--navy);
-  border-radius: 6px;
+  border-radius: var(--r-button);
   color: var(--navy) !important;
   transition: all 0.3s ease !important;
 }
@@ -356,7 +319,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding: 120px 0 80px;
@@ -428,7 +391,8 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .hero__title {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-weight: 900;
+  font-size: clamp(3rem, 5.5vw, 4.25rem);
   color: var(--navy);
   line-height: 1.15;
   margin-bottom: 24px;
@@ -456,7 +420,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   display: inline-flex;
   align-items: center;
   padding: 14px 28px;
-  border-radius: 8px;
+  border-radius: var(--r-button);
   font-size: 0.9rem;
   font-weight: 600;
   transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
@@ -510,7 +474,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 6px;
+  border-radius: var(--r-chip);
   border: 1.5px solid var(--copper);
   color: var(--copper);
   font-size: 0.75rem;
@@ -522,7 +486,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .hero__card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-hero);
   padding: 32px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
@@ -623,6 +587,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .section__title {
   font-family: var(--font-serif);
+  font-weight: 900;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   color: var(--navy);
   line-height: 1.2;
@@ -680,7 +645,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .stat {
   padding: 28px 24px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-card);
   text-align: center;
   background: var(--cream);
   transition: all 0.4s var(--ease);
@@ -688,8 +653,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .stat:hover {
   border-color: var(--copper);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(184, 115, 51, 0.08);
+  transform: translateY(-2px);
 }
 
 .stat__number {
@@ -811,8 +775,8 @@ em { font-family: var(--font-serif); font-style: italic; }
   position: absolute;
   left: 0;
   top: 10px;
-  width: 5px;
-  height: 1.5px;
+  width: 6px;
+  height: 2px;
   background: var(--copper);
 }
 
@@ -830,7 +794,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .edu__card {
   padding: 28px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-card);
   background: var(--cream);
   transition: all 0.4s var(--ease);
 }
@@ -843,6 +807,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 .edu__degree {
   display: inline-block;
   font-family: var(--font-serif);
+  font-weight: 900;
   font-size: 1.75rem;
   color: var(--navy);
   margin-bottom: 4px;
@@ -880,17 +845,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   gap: 10px;
 }
 
-.projects__category-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--copper-dim);
-  color: var(--copper);
-}
-
 .projects__category-label h3 {
   font-family: var(--font-serif);
   font-size: 1.25rem;
@@ -911,28 +865,10 @@ em { font-family: var(--font-serif); font-style: italic; }
   position: relative;
   padding: 32px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   background: var(--white);
   transition: all 0.4s var(--ease);
   overflow: hidden;
-}
-
-/* Cursor-following glow */
-.project__glow {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(184, 115, 51, 0.08), transparent 70%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-}
-
-.project:hover .project__glow {
-  opacity: 1;
 }
 
 .project__content, .project__num, .project__link {
@@ -973,6 +909,7 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .project__content h3 {
   font-family: var(--font-serif);
+  font-weight: 900;
   font-size: 1.2rem;
   color: var(--navy);
   margin-bottom: 12px;
@@ -997,7 +934,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   padding: 4px 10px;
   background: var(--cream);
   border: 1px solid var(--border-light);
-  border-radius: 4px;
+  border-radius: var(--r-chip);
   color: var(--text-light);
 }
 
@@ -1024,15 +961,14 @@ em { font-family: var(--font-serif); font-style: italic; }
 .skill-col {
   padding: 32px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   background: var(--cream);
   transition: all 0.4s var(--ease);
 }
 
 .skill-col:hover {
   border-color: var(--copper);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(184, 115, 51, 0.08);
+  transform: translateY(-2px);
 }
 
 .skill-col h3 {
@@ -1082,7 +1018,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   gap: 32px;
   padding: 32px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   background: var(--cream);
   transition: all 0.35s var(--ease);
 }
@@ -1173,7 +1109,7 @@ em { font-family: var(--font-serif); font-style: italic; }
   flex-direction: column;
   padding: 28px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-card);
   background: var(--white);
   transition: all 0.35s var(--ease);
 }
@@ -1366,17 +1302,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   100% { transform: scale(1); background: var(--copper-dim); color: var(--copper); border-color: rgba(184, 115, 51, 0.2); }
 }
 
-/* Stat card number pulse on hover */
-.stat:hover .stat__number {
-  animation: numberPulse 0.5s var(--ease);
-}
-
-@keyframes numberPulse {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.12); }
-  100% { transform: scale(1); }
-}
-
 /* Contact card arrow animation */
 .contact__item::after {
   content: '\2197';
@@ -1526,24 +1451,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   overflow: hidden;
 }
 
-.skill-col::after {
-  content: '';
-  position: absolute;
-  bottom: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(184, 115, 51, 0.06) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.skill-col:hover::after {
-  opacity: 1;
-}
-
 /* ===== Education Card Stagger ===== */
 .edu__card {
   position: relative;
@@ -1620,26 +1527,6 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .contact__item:hover::before {
   transform: scaleX(1);
-}
-
-/* ===== Stat Card Counter Glow ===== */
-.stat {
-  position: relative;
-  overflow: hidden;
-}
-
-.stat::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(184, 115, 51, 0.08) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.stat:hover::after {
-  opacity: 1;
 }
 
 /* ===== Smooth Section Dividers ===== */

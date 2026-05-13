@@ -14,7 +14,7 @@
   --border: #e0ddd6;
   --border-light: #ece9e2;
   --font-serif: 'Merriweather', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --nav-h: 72px;
   --max-w: 1120px;
@@ -169,6 +169,13 @@ body {
 ::selection {
   background: var(--copper);
   color: var(--white);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -1019,18 +1026,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   box-shadow: 0 12px 32px rgba(184, 115, 51, 0.08);
 }
 
-.skill-col__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--copper-dim);
-  color: var(--copper);
-  margin-bottom: 16px;
-}
-
 .skill-col h3 {
   font-family: var(--font-serif);
   font-size: 1.1rem;
@@ -1078,7 +1073,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   gap: 32px;
   padding: 32px;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--copper);
   border-radius: 16px;
   background: var(--cream);
   transition: all 0.35s var(--ease);
@@ -1086,7 +1080,6 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 .pub:hover {
   border-color: var(--copper);
-  border-left-color: var(--copper);
   box-shadow: 0 8px 24px rgba(184, 115, 51, 0.08);
   transform: translateY(-3px);
 }
@@ -1712,7 +1705,9 @@ em { font-family: var(--font-serif); font-style: italic; }
 
   .edu__cards { grid-template-columns: 1fr; }
   .projects__grid { grid-template-columns: 1fr; }
-  .about__stats { display: none; }
+  .about__stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .about__stats .stat { padding: 20px 16px; }
+  .about__stats .stat__number { font-size: 2.25rem; }
   .skills__grid { grid-template-columns: 1fr; }
   .contact__links { grid-template-columns: 1fr; }
   .contact__cta { flex-direction: column; }

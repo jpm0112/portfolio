@@ -587,19 +587,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   titles.forEach(title => observer.observe(title));
 })();
 
-/* ===== Card Scale-In on Scroll ===== */
+/* ===== Card Scale-In on Scroll =====
+   Cards are visible immediately; only the publication card keeps the
+   scale-in entrance as a signature reveal. */
 (function initScaleReveal() {
-  // Apply scale-reveal to project cards, edu cards, and skill columns
-  const cards = document.querySelectorAll('.project, .edu__card, .skill-col, .pub, .contact__item');
+  // Strip the fade-up class from card-style elements so they just appear.
+  document.querySelectorAll('.project, .edu__card, .skill-col, .contact__item, .stat, .exp__item, .section__subheader, .about__text').forEach(el => {
+    el.classList.remove('reveal');
+  });
 
-  cards.forEach((card, i) => {
-    if (!card.classList.contains('reveal')) {
-      card.classList.add('scale-reveal');
-    } else {
-      // Replace reveal with scale-reveal for a more dramatic entrance
-      card.classList.remove('reveal');
-      card.classList.add('scale-reveal');
-    }
+  // Publications: convert reveal to scale-reveal for the dramatic entrance.
+  document.querySelectorAll('.pub').forEach(card => {
+    card.classList.remove('reveal');
+    card.classList.add('scale-reveal');
   });
 
   const observer = new IntersectionObserver((entries) => {

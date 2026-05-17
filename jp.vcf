@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Morande;Juan Pablo;;;
+FN:Juan Pablo Morande
+ORG:Auburn University
+TITLE:PhD Candidate, Industrial & Systems Engineering
+TEL;TYPE=CELL,VOICE:+13345594617
+EMAIL;TYPE=WORK,pref:jpm0112@auburn.edu
+EMAIL;TYPE=HOME:juanpablomorandec@gmail.com
+URL:https://jpmorande.com
+URL:https://www.linkedin.com/in/jpmorande
+URL:https://github.com/jpm0112
+URL:https://scholar.google.com/citations?user=lm60Dp0AAAAJ
+ADR;TYPE=WORK:;;;Auburn;AL;;USA
+NOTE:Operations Research & Machine Learning. Optimization, scheduling, forecasting, and LLM-based systems.
+END:VCARD

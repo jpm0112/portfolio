@@ -15,18 +15,20 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,900;1,400;1,900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=19" />
+  <noscript>
+    <style>
+      /* Scroll reveals are JS-driven; without JS the content must still be visible. */
+      .reveal, .scale-reveal { opacity: 1; transform: none; }
+      .word-reveal .word { opacity: 1; transform: none; }
+    </style>
+  </noscript>
 </head>
 <body>
 
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
-
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader__bar"></div>
-  </div>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
@@ -52,7 +54,6 @@
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero__bg">
-      <canvas class="hero__particles" id="heroParticles"></canvas>
       <div class="hero__grid-pattern"></div>
     </div>
     <div class="container hero__container">
@@ -646,6 +647,6 @@
     </svg>
   </button>
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

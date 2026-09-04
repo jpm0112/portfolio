@@ -1,20 +1,5 @@
-/* ===== Page Loader ===== */
-(function initLoader() {
-  const loader = document.getElementById('loader');
-  if (!loader) return;
-
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('done');
-    }, 600);
-  });
-
-  // Fallback: dismiss loader after 3s even if load event is slow
-  setTimeout(() => {
-    loader.classList.add('done');
-  }, 3000);
-})();
-
+/* Single source of truth for the user's motion preference. */
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ===== Navigation ===== */
 (function initNav() {
@@ -127,6 +112,12 @@
 
 /* ===== Counter Animation ===== */
 (function initCounters() {
+  if (REDUCED_MOTION) {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      el.textContent = el.dataset.count + (el.dataset.suffix || '');
+    });
+    return;
+  }
   const counters = document.querySelectorAll('[data-count]');
 
   const observer = new IntersectionObserver((entries) => {
@@ -165,13 +156,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
     }
   });
 });
 
 /* ===== Subtle parallax on hero grid pattern ===== */
 (function initHeroParallax() {
+  if (REDUCED_MOTION) return;
   const grid = document.querySelector('.hero__grid-pattern');
   if (!grid) return;
 
@@ -193,109 +185,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
   btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
-
-/* ===== 3D Tilt effect on stat & education cards ===== */
-(function initTilt() {
-  const cards = document.querySelectorAll('.stat, .edu__card, .hero__card');
-  if (window.matchMedia('(pointer: fine)').matches === false) return;
-
-  cards.forEach(card => {
-    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-    let rafId = null;
-
-    function animate() {
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
-      card.style.transform = `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg) translateY(-3px)`;
-      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
-        rafId = requestAnimationFrame(animate);
-      }
-    }
-
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      targetX = ((y - centerY) / centerY) * -3;
-      targetY = ((x - centerX) / centerX) * 3;
-      if (!rafId) rafId = requestAnimationFrame(animate);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
-      if (!rafId) rafId = requestAnimationFrame(animate);
-      // Smooth return to rest
-      function settle() {
-        currentX += (0 - currentX) * 0.06;
-        currentY += (0 - currentY) * 0.06;
-        card.style.transform = `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
-        if (Math.abs(currentX) > 0.01 || Math.abs(currentY) > 0.01) {
-          rafId = requestAnimationFrame(settle);
-        } else {
-          card.style.transform = '';
-          rafId = null;
-        }
-      }
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(settle);
-    });
-  });
-})();
-
-/* ===== Magnetic button effect (lerped like tilt) ===== */
-(function initMagnetic() {
-  const buttons = document.querySelectorAll('.btn--filled, .btn--ghost, .nav__cta');
-  if (window.matchMedia('(pointer: fine)').matches === false) return;
-
-  buttons.forEach(btn => {
-    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-    let rafId = null;
-
-    function animate() {
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
-      btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
-        rafId = requestAnimationFrame(animate);
-      } else {
-        rafId = null;
-      }
-    }
-
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      targetX = x * 0.04;
-      targetY = y * 0.04;
-      if (!rafId) rafId = requestAnimationFrame(animate);
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
-      if (!rafId) rafId = requestAnimationFrame(animate);
-      // Smooth settle back to rest
-      function settle() {
-        currentX += (0 - currentX) * 0.06;
-        currentY += (0 - currentY) * 0.06;
-        btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
-        if (Math.abs(currentX) > 0.01 || Math.abs(currentY) > 0.01) {
-          rafId = requestAnimationFrame(settle);
-        } else {
-          btn.style.transform = '';
-          rafId = null;
-        }
-      }
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(settle);
-    });
+    window.scrollTo({ top: 0, behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
   });
 })();
 
@@ -313,23 +203,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
-})();
-
-/* ===== Button Ripple Effect ===== */
-(function initRipple() {
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
-      const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-      this.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
-    });
-  });
 })();
 
 /* ===== Experience Timeline Animation ===== */
@@ -351,6 +224,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ===== Smooth section number count-up on scroll ===== */
 (function initSectionNumbers() {
+  if (REDUCED_MOTION) return;
   const numbers = document.querySelectorAll('.section__number');
   numbers.forEach(num => {
     num.style.opacity = '0';
@@ -371,165 +245,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   numbers.forEach(num => observer.observe(num));
 })();
 
-/* ===== Floating Particle System ===== */
-(function initParticles() {
-  const canvas = document.getElementById('heroParticles');
-  if (!canvas) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let mouse = { x: -1000, y: -1000 };
-  let animFrame;
-
-  function resize() {
-    const hero = canvas.parentElement.parentElement;
-    canvas.width = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
-  }
-
-  function createParticles() {
-    particles = [];
-    const count = Math.floor((canvas.width * canvas.height) / 18000);
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.3 + 0.1,
-        pulseSpeed: Math.random() * 0.02 + 0.005,
-        pulsePhase: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  function drawParticles(time) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach((p, i) => {
-      const pulse = Math.sin(time * p.pulseSpeed + p.pulsePhase) * 0.15 + 0.85;
-      const alpha = p.opacity * pulse;
-
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        const force = (120 - dist) / 120;
-        p.x += dx * force * 0.02;
-        p.y += dy * force * 0.02;
-      }
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if (p.x < -10) p.x = canvas.width + 10;
-      if (p.x > canvas.width + 10) p.x = -10;
-      if (p.y < -10) p.y = canvas.height + 10;
-      if (p.y > canvas.height + 10) p.y = -10;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(184, 115, 51, ${alpha})`;
-      ctx.fill();
-
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const cdx = p.x - p2.x;
-        const cdy = p.y - p2.y;
-        const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
-        if (cdist < 100) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(184, 115, 51, ${0.06 * (1 - cdist / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    });
-
-    animFrame = requestAnimationFrame(drawParticles);
-  }
-
-  canvas.parentElement.parentElement.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-
-  canvas.parentElement.parentElement.addEventListener('mouseleave', () => {
-    mouse.x = -1000;
-    mouse.y = -1000;
-  });
-
-  resize();
-  createParticles();
-  requestAnimationFrame(drawParticles);
-
-  window.addEventListener('resize', () => {
-    resize();
-    createParticles();
-  });
-
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        cancelAnimationFrame(animFrame);
-      } else {
-        requestAnimationFrame(drawParticles);
-      }
-    });
-  }, { threshold: 0 });
-  heroObserver.observe(canvas.parentElement.parentElement);
-})();
-
-/* ===== Text Scramble on Section Numbers ===== */
-(function initTextScramble() {
-  const chars = '0123456789!@#$%&*';
-  const numbers = document.querySelectorAll('.section__number');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const finalText = el.textContent;
-        const duration = 800;
-        const start = performance.now();
-
-        function scramble(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          let result = '';
-
-          for (let i = 0; i < finalText.length; i++) {
-            if (progress > (i + 1) / finalText.length) {
-              result += finalText[i];
-            } else {
-              result += chars[Math.floor(Math.random() * chars.length)];
-            }
-          }
-
-          el.textContent = result;
-          if (progress < 1) {
-            requestAnimationFrame(scramble);
-          } else {
-            el.textContent = finalText;
-          }
-        }
-
-        requestAnimationFrame(scramble);
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  numbers.forEach(num => observer.observe(num));
-})();
-
 /* ===== Word-by-Word Section Title Reveal ===== */
 (function initWordReveal() {
+  if (REDUCED_MOTION) return;
   const titles = document.querySelectorAll('.section__title');
 
   titles.forEach(title => {
@@ -567,6 +285,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
    Cards are visible immediately; only the publication card keeps the
    scale-in entrance as a signature reveal. */
 (function initScaleReveal() {
+  if (REDUCED_MOTION) return;
   // Strip the fade-up class from card-style elements so they just appear.
   document.querySelectorAll('.project, .edu__card, .skill-col, .contact__item, .stat, .exp__item, .section__subheader, .about__text').forEach(el => {
     el.classList.remove('reveal');
@@ -630,6 +349,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ===== Skill list stagger animation ===== */
 (function initSkillStagger() {
+  if (REDUCED_MOTION) return;
   const skillCols = document.querySelectorAll('.skill-col');
 
   const observer = new IntersectionObserver((entries) => {

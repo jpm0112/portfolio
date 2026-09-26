@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,900;1,400;1,900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20" />
+  <link rel="stylesheet" href="styles.css?v=21" />
   <noscript>
     <style>
       /* Scroll reveals are JS-driven; without JS the content must still be visible. */
@@ -58,24 +58,24 @@
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero__bg">
+      <canvas class="hero__particles" id="heroParticles" aria-hidden="true"></canvas>
       <div class="hero__grid-pattern"></div>
     </div>
     <div class="container hero__container">
       <div class="hero__left">
         <div class="hero__label anim-reveal" style="--d:0">
           <span class="hero__label-line"></span>
-          <span>Operations Research · Machine Learning</span>
+          <span>PhD Researcher</span>
         </div>
         <h1 class="hero__title">
-          <span class="anim-clip" style="--d:1">Better logistics</span>
-          <span class="anim-clip" style="--d:2">decisions.</span>
+          <span class="anim-clip" style="--d:1">Operations Research</span>
+          <span class="anim-clip" style="--d:2"><em>&</em> Machine Learning</span>
         </h1>
         <p class="hero__desc anim-reveal" style="--d:3">
           I'm <strong>Juan Pablo Morande</strong>, a PhD candidate in Industrial and Systems Engineering
-          at Auburn University. I build machine learning and optimization methods for logistics,
-          scheduling, and supply chains.
+          at Auburn University. I work on logistics, scheduling, and forecasting problems
+          using optimization and machine learning.
         </p>
-        <p class="hero__availability anim-reveal" style="--d:3">Seeking applied research roles in the US · Open to relocation · Available for immediate start</p>
         <div class="hero__actions anim-reveal" style="--d:4">
           <a href="#projects" class="btn btn--filled">View Projects</a>
           <a href="#contact" class="btn btn--ghost">Contact Me</a>
@@ -84,11 +84,36 @@
       </div>
       <div class="hero__right anim-reveal" style="--d:2">
         <div class="hero__card">
-          <h2 class="hero__card-heading">Selected work</h2>
-          <a class="hero__proof" href="#project-truck"><span class="hero__proof-value">27%</span><span><strong>Truck loading</strong><br />Improvement over one-dimensional baselines across 300 instances</span></a>
-          <a class="hero__proof" href="#project-supply"><span class="hero__proof-value">4–5%</span><span><strong>Supply chain resilience</strong><br />Improvement in published stochastic programming research</span></a>
-          <a class="hero__proof" href="#project-freight"><span class="hero__proof-value">XAI</span><span><strong>Freight forecasting</strong><br />Interpretable models for Chilean port rates</span></a>
-          <p class="hero__card-footnote">PhD expected December 2026 · Currently F-1 · STEM OPT and H-1B1 eligible</p>
+          <div class="hero__card-row">
+            <span class="hero__card-label">Focus Areas</span>
+          </div>
+          <div class="hero__card-tags">
+            <span>Optimization</span>
+            <span>Simulation</span>
+            <span>Logistics</span>
+            <span>Scheduling</span>
+            <span>Explainable AI</span>
+            <span>Multi-Agent LLM Systems</span>
+          </div>
+          <div class="hero__card-divider"></div>
+          <div class="hero__card-row">
+            <span class="hero__card-label">Expected Graduation</span>
+          </div>
+          <p class="hero__card-text">PhD, Auburn University, December 2026 (expected)</p>
+          <div class="hero__card-divider"></div>
+          <div class="hero__card-row">
+            <span class="hero__card-label">Looking For</span>
+          </div>
+          <p class="hero__card-text">Applied Research Engineer roles in the US. Open for relocation. Available for immediate start.</p>
+          <div class="hero__card-divider"></div>
+          <div class="hero__card-row">
+            <span class="hero__card-label">Work Authorization</span>
+          </div>
+          <div class="hero__card-tags hero__card-tags--small">
+            <span>Currently F-1 Visa</span>
+            <span>STEM OPT Eligible</span>
+            <span>H-1B1 Eligible (Chile FTA, lottery-exempt)</span>
+          </div>
         </div>
       </div>
     </div>
@@ -301,18 +326,15 @@
       </div>
 
       <div class="projects__grid">
-        <article class="project project--featured reveal" id="project-freight" style="--d:0">
+        <article class="project project--featured reveal" style="--d:0">
           <span class="project__num">01</span>
           <div class="project__content">
             <h3>Freight Rate Forecasting with XAI</h3>
-            <p><strong>Problem:</strong> Forecast shipping freight rates in Chilean ports.</p>
-            <p><strong>Approach:</strong> Compared Temporal Fusion Transformers, LSTMs, and attention-based models, with Bayesian tuning and LIME/SHAP explanations.</p>
-            <p><strong>Result:</strong> Surfaced the main drivers behind rate changes for maritime logistics stakeholders.</p>
+            <p>Forecasted shipping freight rates in Chilean ports using Temporal Fusion Transformers, LSTMs, and attention-based architectures, with LIME and SHAP for interpretability and Bayesian methods for hyperparameter tuning. The explainability analysis surfaced the main drivers behind rate changes for maritime logistics stakeholders.</p>
             <div class="project__tags">
               <span>PyTorch</span><span>Transformers</span><span>LIME</span><span>SHAP</span><span>Time Series</span>
             </div>
           </div>
-          <a href="https://github.com/jpm0112/shippingNN" target="_blank" rel="noopener" class="project__link">View research code</a>
         </article>
 
         <article class="project reveal" style="--d:1">
@@ -326,32 +348,27 @@
           </div>
         </article>
 
-        <article class="project reveal" id="project-supply" style="--d:2">
+        <article class="project reveal" style="--d:2">
           <span class="project__num">03</span>
           <div class="project__content">
             <h3>Closed-Loop Supply Chain Optimization</h3>
-            <p><strong>Problem:</strong> Design viable supply chains when disruptions and product decisions interact.</p>
-            <p><strong>Approach:</strong> Developed a stochastic programming framework informed by two Norwegian circular manufacturing case studies during a research visit at NTNU.</p>
-            <p><strong>Result:</strong> Resilience improved 4–5% and budgets fell 2–10%, with gains in sustainability and circularity. Published in <em>Omega</em> (2025).</p>
+            <p>Developed a stochastic programming framework that integrates product development and design decisions into supply chains facing disruptive events, informed by two Norwegian circular manufacturing case studies. Results showed resilience improvements of 4–5%, budget savings of 2–10%, and measurable gains in sustainability and circularity. Published in <em>Omega</em> (2025); developed during a research visit at NTNU in Norway.</p>
             <div class="project__tags">
               <span>Stochastic Programming</span><span>MILP</span><span>Supply Chain</span>
             </div>
           </div>
-          <a href="https://doi.org/10.1016/j.omega.2025.103317" target="_blank" rel="noopener" class="project__link">Read paper</a>
+          <a href="https://doi.org/10.1016/j.omega.2025.103317" target="_blank" rel="noopener" class="project__link">Read Paper &rarr;</a>
         </article>
 
-        <article class="project reveal" id="project-truck" style="--d:3">
+        <article class="project reveal" style="--d:3">
           <span class="project__num">04</span>
           <div class="project__content">
             <h3>Two-Dimensional Truck Loading Optimization</h3>
-            <p><strong>Problem:</strong> Load a Colombian motorcycle assembler’s heterogeneous fleet while limiting delays and unloading rehandles.</p>
-            <p><strong>Approach:</strong> Built a three-stage MILP matheuristic in Java and CPLEX.</p>
-            <p><strong>Result:</strong> Across 300 test instances, improved the company-defined metric by an average of 27% over one-dimensional baselines and saved 2.69 trucks per day on average, particularly under relaxed credit constraints.</p>
+            <p>Developed a three-stage matheuristic combining MILP models to solve a two-dimensional vehicle loading problem faced by a Colombian motorcycle assembler operating a heterogeneous fleet. The approach maximizes on-time deliveries, minimizes the number of trucks used, and reduces unloading rehandles during delivery stops. Across 300 test instances, the matheuristic improved the company-defined performance metric by an average of 27% over one-dimensional baselines and saved 2.69 trucks per day on average, particularly under relaxed credit constraints. Implemented in Java with CPLEX.</p>
             <div class="project__tags">
               <span>MILP</span><span>Matheuristic</span><span>Two-Dimensional Bin Packing</span><span>Logistics</span>
             </div>
           </div>
-          <a href="mailto:jpm0112@auburn.edu?subject=Truck%20loading%20research" class="project__link">Ask about the manuscript</a>
         </article>
 
         <article class="project reveal" style="--d:4">
@@ -374,7 +391,6 @@
               <span>LLM</span><span>Multi-Agent</span><span>Episodic Memory</span><span>Job-Shop Scheduling</span><span>PydanticAI</span>
             </div>
           </div>
-          <a href="https://github.com/jpm0112/swarmLLM" target="_blank" rel="noopener" class="project__link">View research code</a>
         </article>
 
         <article class="project reveal" style="--d:6">
@@ -428,7 +444,6 @@
               <span>HTML/CSS</span><span>JavaScript</span><span>Next.js</span><span>Responsive Design</span>
             </div>
           </div>
-          <a href="https://github.com/jpm0112/pagina-web-lontra" target="_blank" rel="noopener" class="project__link">View example site code</a>
         </article>
 
         <article class="project reveal" style="--d:1">
@@ -637,6 +652,6 @@
     </svg>
   </button>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>

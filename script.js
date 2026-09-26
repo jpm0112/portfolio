@@ -8,6 +8,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   const links = document.getElementById('navLinks');
   const overlay = document.getElementById('mobileOverlay');
   const navAnchors = links.querySelectorAll('a');
+  const mobile = window.matchMedia('(max-width: 900px)');
 
   // Scroll class
   window.addEventListener('scroll', () => {
@@ -15,26 +16,32 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   });
 
   // Mobile toggle
-  function toggleMobile() {
-    const isOpen = links.classList.contains('open');
-    toggle.classList.toggle('active', !isOpen);
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    links.classList.toggle('open', !isOpen);
-    overlay.classList.toggle('active', !isOpen);
-    document.body.style.overflow = !isOpen ? 'hidden' : '';
+  function setMobileOpen(open, restoreFocus = false) {
+    toggle.classList.toggle('active', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    links.classList.toggle('open', open);
+    overlay.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (restoreFocus) toggle.focus();
   }
 
-  toggle.addEventListener('click', toggleMobile);
-  overlay.addEventListener('click', toggleMobile);
+  toggle.addEventListener('click', () => setMobileOpen(!links.classList.contains('open')));
+  overlay.addEventListener('click', () => setMobileOpen(false, true));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && links.classList.contains('open')) setMobileOpen(false, true);
+  });
+  mobile.addEventListener('change', () => setMobileOpen(false));
 
   // Close mobile nav on link click
   navAnchors.forEach(a => {
     a.addEventListener('click', () => {
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-      links.classList.remove('open');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
+      setMobileOpen(false);
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
     });
   });
 
@@ -315,7 +322,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* ===== Parallax Depth on Scroll ===== */
 (function initParallaxDepth() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(max-width: 768px)').matches) return;
+  if (window.matchMedia('(max-width: 900px)').matches) return;
 
   const layers = [
     { selector: '.about__stats', speed: 0.05 },

@@ -93,7 +93,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
    instead of being hard-coded:
    - data-since="YYYY-MM": years elapsed since that month (floored)
    - data-source="research-projects": count of project cards in the first
-     .projects__grid (the Research grid that precedes Applied Projects).
+     .projects__grid (the Research grid that precedes Personal Projects).
 */
 (function initDynamicStats() {
   // Years-since computation, floored. Used with data-suffix="+" to render "7+".
